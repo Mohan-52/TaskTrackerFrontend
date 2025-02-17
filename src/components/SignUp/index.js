@@ -15,6 +15,17 @@ const SignUp = (props) => {
     setErrorMessage("");
     setSuccessMessage("");
 
+    
+    if (pwd.trim().length<7){
+      setErrorMessage("Invalid Password")
+      return
+    }
+
+    if(name.trim().length<3){
+      setErrorMessage("Invalid User Name. User name must be atleast of s3 characters")
+      return
+    }
+
     const userDetails = { name, email, password: pwd };
 
     try {
@@ -47,7 +58,7 @@ const SignUp = (props) => {
     <div className="sing-up-con">
       <h2>Sign Up</h2>
 
-      {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+      {successMessage && <p className="success-para">{successMessage}</p>}
 
       <form onSubmit={submitForm} className="form">
         <label htmlFor="name">Name</label>
@@ -70,7 +81,7 @@ const SignUp = (props) => {
 
         <label htmlFor="pwd">Password</label>
         <input
-          type="password"
+          type={showPassword?"text":"password"}
           id="pwd"
           value={pwd}
           onChange={(e) => setPwd(e.target.value)}
@@ -95,7 +106,7 @@ const SignUp = (props) => {
            Back To Login
         </button>
       </form>
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      {errorMessage && <p className="error-para">{errorMessage}</p>}
     </div>
   );
 };
