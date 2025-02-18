@@ -51,8 +51,19 @@ const TaskDetails = () => {
         }
 
         const data = await response.json();
-        setTask(data);
-        setEditedTask(data);
+
+        const updateData = {
+          createdAt: data.created_at,
+          description: data.description,
+          dueDate: data.due_date,
+          id: data.id,
+          status: data.status,
+          title: data.title,
+          userId: data.user_id,
+        };
+
+        setTask(updateData);
+        setEditedTask(updateData);
         setStatus(apiStatus.success);
       } catch (error) {
         setStatus(apiStatus.failure);
@@ -218,17 +229,17 @@ const TaskDetails = () => {
           <input
             className="input-field"
             type="date"
-            name="due_date"
-            value={editedTask.due_date}
+            name="dueDate"
+            value={editedTask.dueDate}
             onChange={handleChange}
           />
         ) : (
-          task.due_date
+          task.dueDate
         )}
       </p>
 
       <p>
-        <strong>Created At:</strong> {task.created_at}
+        <strong>Created At:</strong> {task.createdAt}
       </p>
     </div>
   );
